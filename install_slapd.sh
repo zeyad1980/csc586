@@ -16,6 +16,5 @@ echo -e "slapd slapd/purge_database boolean false" | debconf-set-selections
 echo -e "slapd slapd/move_old_database boolean true" | debconf-set-selections
 echo -e "slapd slapd/allow_ldap_v2 boolean false" | debconf-set-selections
 echo -e "slapd slapd/no_configuration boolean false" | debconf-set-selections
-apt install ldap-utils
 
-sudo dpkg-reconfigure slapd 
+dpkg-reconfigure slapd 
