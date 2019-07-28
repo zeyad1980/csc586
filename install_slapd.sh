@@ -1,6 +1,6 @@
 #!/bin/bash
-#export DEBIAN_FRONTEND='non-interactive'
-export DEBIAN_FRONTEND=readline apt-get install slrn
+export DEBIAN_FRONTEND='non-interactive'
+
 
 echo -e "slapd slapd/root_password password admin" | debconf-set-selections
 echo -e "slapd slapd/root_password_again password admin" | debconf-set-selections
