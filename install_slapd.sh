@@ -3,6 +3,7 @@ export DEBIAN_FRONTEND='non-interactive'
 
 
 echo -e "slapd slapd/root_password password admin" | debconf-set-selections
+dpkg-reconfigure slapd
 echo -e "slapd slapd/root_password_again password admin" | debconf-set-selections
 echo -e "slapd slapd/internal/adminpw password admin" | debconf-set-selections
 echo -e "slapd slapd/internal/generated_adminpw password admin" | debconf-set-selections
@@ -17,4 +18,4 @@ echo -e "slapd slapd/move_old_database boolean true" | debconf-set-selections
 echo -e "slapd slapd/allow_ldap_v2 boolean false" | debconf-set-selections
 echo -e "slapd slapd/no_configuration boolean false" | debconf-set-selections
 
-dpkg-reconfigure slapd 
+#dpkg-reconfigure slapd 
