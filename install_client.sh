@@ -82,7 +82,8 @@ session optional                        pam_umask.so
 # and here are more per-package modules (the "Additional" block)
 session required        pam_unix.so                                                                                                                                                                                      
 session optional                        pam_ldap.so                                                                                                                                                                      
-session optional        pam_systemd.so                                                                                                                                                                                   
+session optional        pam_systemd.so  
+session optional pam_mkhomedir.so skel=/etc/skel umask=077
 # end of pam-auth-update config
                                     
 
