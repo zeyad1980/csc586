@@ -1,7 +1,7 @@
 #!/bin/bash
 export DEBIAN_FRONTEND=noninteractive
 
-sudo apt-get update
+sudo apt update
 
 echo -e "slapd slapd/root_password password admin" |sudo debconf-set-selections
 echo -e "slapd slapd/root_password_again password admin" |sudo debconf-set-selections
