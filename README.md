@@ -1,2 +1,3 @@
 # csc586
-he
+This is Zeyed Nidhamaldeen
+Assignment2
