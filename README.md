@@ -1,3 +1,3 @@
-# csc586
+# csc586zeyad
 This is Zeyed Nidhamaldeen
-Assignment2
+
