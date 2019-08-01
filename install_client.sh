@@ -26,46 +26,11 @@ sudo apt install -y libnss-ldap libpam-ldap ldap-utils
 sudo chmod 755 nsswitch
 sudo cp nsswitch_conf /local/repository/etc/nsswitch.conf
 
-cat<<EOF >/local/repository/etc/pam.d/common-password
-## here are the per-package modules (the "Primary" block)
-password        [success=2 default=ignore]      pam_unix.so obscure sha512                                                                                                                                               
-password        [success=1 user_unknown=ignore default=die]     pam_ldap.so use_authtok                                                                                                                   
-# here's the fallback if no module succeeds
-password        requisite                       pam_deny.so                                                                                                                                                              
-# prime the stack with a positive return value if there isn't one already;
-# this avoids us returning an error just because nothing sets a success code
-# since the modules above will each just jump around
-password        required                        pam_permit.so                                                                                                                                                            
-# and here are more per-package modules (the "Additional" block)
-# end of pam-auth-update config
+sudo chmod 755 pam_d_password
+sudo cp pam_d_password /local/repository/etc/pam.d/common-password
 
-EOF
-
-cat<<EOF >/local/repository/etc/pam.d/common-session  
-
-# here are the per-package modules (the "Primary" block)
-session [default=1]                     pam_permit.so                                                                                                                                                                    
-# here's the fallback if no module succeeds
-session requisite                       pam_deny.so
-# prime the stack with a positive return value if there isn't one already;
-# this avoids us returning an error just because nothing sets a success code
-# since the modules above will each just jump around
-session required                        pam_permit.so                                                                                                                                                                    
-# The pam_umask module will set the umask according to the system default in
-# /etc/login.defs and user settings, solving the problem of different
-# umask settings with different shells, display managers, remote sessions etc.
-# See "man pam_umask".
-session optional                        pam_umask.so 
-# and here are more per-package modules (the "Additional" block)
-session required        pam_unix.so                                                                                                                                                                                      
-session optional                        pam_ldap.so                                                                                                                                                                      
-session optional        pam_systemd.so  
-session optional pam_mkhomedir.so skel=/etc/skel umask=077
-# end of pam-auth-update config
-                                    
-
-EOF
-
+sudo chmod 755 pam_d_session
+sudo cp pam_d_session /local/repository/etc/pam.d/common-session  
 
 sudo getent passwd student
 sudo su - student
