@@ -1,41 +1,40 @@
 #!/bin/bash
+
+ADMIN_PASSWORD="royal"
+#updates the system repo database
 sudo apt update
 
+#change the fronend to noninteractive, avoiding prompts for automation
+export DEBIAN_FRONTEND=noninteractive
+echo "
+ldap_auth_config        ldap_auth_config/bindpw password royal
+ldap_auth_config        ldap_auth_config/rootbindpw password royal
+ldap-auth-config        ldap-auth-config/dbrootlogin    boolean true
+ldap-auth-config        ldap-auth-config/pam_password   select  md5
+ldap-auth-config        ldap-auth-config/move-to-debconf        boolean true
+ldap_auth_config        ldap_auth_config/ldapns/base-dn string  dc=clemson,dc=cloudlab,dc=us
+ldap_auth_config        ldap_auth_config/rootbinddn     string  cn=admin,dc=clemson,dc=cloudlab,dc=us
+ldap_auth_config        ldap_auth_config/ldapns/ldap-server     string  ldap://192.168.1.1
+ldap_auth_config        ldap_auth_config/ldapns/ldap_version    select  3
+ldap_auth_config        ldap_auth_config/dblogin        boolean false
+ldap_auth_config        ldap_auth_config/override       boolean true " | sudo debconf-get-selections
 
-echo -e "ldap-auth-config        ldap-auth-config/rootbindpw password admin" |sudo debconf-set-selections
-echo -e "ldap_auth_config        ldap_auth_config/bindpw password admin" |sudo debconf-set-selections
-echo -e "ldap_auth_config        ldap_auth_config/rootbindpw password admin" |sudo debconf-set-selections
-echo -e "ldap-auth-config        ldap-auth-config/binddn string  cn=student,dc=example,dc=net" |sudo debconf-set-selections
-echo -e "ldap-auth-config        ldap-auth-config/dbrootlogin    boolean true" |sudo debconf-set-selections
-echo -e "ldap-auth-config        ldap-auth-config/pam_password   select  md5" |sudo debconf-set-selections
-echo -e "ldap_auth_config        ldap_auth_config/dbrootlogin    boolean true" |sudo debconf-set-selections
-echo -e "ldap-auth-config        ldap-auth-config/move-to-debconf        boolean true" |sudo debconf-set-selections
-echo -e "ldap_auth_config        ldap_auth_config/ldapns/base-dn string  dc=clemson,dc=cloudlab,dc=us" |sudo debconf-set-selections
-echo -e "ldap_auth_config        ldap_auth_config/rootbinddn     string  cn=admin,dc=clemson,dc=cloudlab,dc=us" |sudo debconf-set-selections
-echo -e "ldap_auth_config        ldap_auth_config/ldapns/ldap-server     string  ldap://192.168.1.1
-libpam-runtime  libpam-runtime/profiles multiselect     unix, ldap, systemd, capability" |sudo debconf-set-selections
-echo -e "ldap_auth_config        ldap_auth_config/ldapns/ldap_version    select  3" |sudo debconf-set-selections
-echo -e "ldap_auth_config        ldap_auth_config/dblogin        boolean false" |sudo debconf-set-selections
-echo -e "ldap_auth_config        ldap_auth_config/override       boolean true"  |sudo debconf-set-selections
+#installs libnss-ldap libpam-ldap ldap-utils along with all their dependencies
+sudo apt install -y -q libnss-ldap -y libpam-ldap ldap-utils
 
+#changes to ldap.conf, ldap.secret, nsswitch.conf, common-session, common-password
 
+sudo sed -i 's/uri ldapi:\/\/\//uri ldap:\/\/192.168.1.1\//g' /etc/ldap.conf
+sudo sed -i 's/base dc=example,dc=net/base dc=clemson,dc=cloudlab,dc=us/g' /etc/ldap.conf
+sudo sed -i 's/rootbinddn cn=manager,dc=example,dc=net/rootbinddn cn=admin,dc=clemson,dc=cloudlab,dc=us/g' /etc/ldap.conf
+sudo sed -i '/passwd:/ s/$/ ldap/' /etc/nsswitch.conf
+sudo sed -i '/group:/ s/$/ ldap/' /etc/nsswitch.conf
+sudo sed -i '/# end of pam-auth-update config/ i session optional pam_mkhomedir.so  skel=/etc/skel  umsak=077' /etc/pam.d/common-session
+sudo sed -i 's/use_authtok//g' /etc/pam.d/common-password
+sudo bash <<EOF
+echo $ADMIN_PASSWORD > /etc/ldap.secret
+EOF
+sudo chmod 600 /etc/ldap.secret
 
-sudo apt install -y libnss-ldap libpam-ldap ldap-utils
-
-
-sudo chmod 755 nsswitch_conf
-sudo cp nsswitch_conf /etc/nsswitch.conf
-
-sudo chmod 755 pam_d_password
-sudo cp pam_d_password /etc/pam.d/common-password
-
-sudo chmod 755 pam_d_session
-sudo cp pam_d_session /etc/pam.d/common-session  
-
-sudo getent passwd student
-sudo su - student
-
-
-
-
-
+#fetches and prints details for a particular user 
+getent passwd student
