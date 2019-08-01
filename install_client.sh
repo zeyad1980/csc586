@@ -5,7 +5,7 @@ sudo apt update
 echo -e "ldap-auth-config        ldap-auth-config/rootbindpw password admin" |sudo debconf-set-selections
 echo -e "ldap_auth_config        ldap_auth_config/bindpw password admin" |sudo debconf-set-selections
 echo -e "ldap_auth_config        ldap_auth_config/rootbindpw password admin" |sudo debconf-set-selections
-echo -e "ldap-auth-config        ldap-auth-config/binddn string  cn=proxyuser,dc=example,dc=net" |sudo debconf-set-selections
+echo -e "ldap-auth-config        ldap-auth-config/binddn string  cn=student,dc=example,dc=net" |sudo debconf-set-selections
 echo -e "ldap-auth-config        ldap-auth-config/dbrootlogin    boolean true" |sudo debconf-set-selections
 echo -e "ldap-auth-config        ldap-auth-config/pam_password   select  md5" |sudo debconf-set-selections
 echo -e "ldap_auth_config        ldap_auth_config/dbrootlogin    boolean true" |sudo debconf-set-selections
