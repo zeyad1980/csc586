@@ -1,7 +1,7 @@
 #!/bin/bash
 sudo apt update
 
-echo -e "ldap_auth_config        ldap_auth_config/ldapns/ldap-server     string  ldap://192.168.1.1" |sudo debconf-set-selections
+
 echo -e "ldap-auth-config        ldap-auth-config/rootbindpw password admin" |sudo debconf-set-selections
 echo -e "ldap_auth_config        ldap_auth_config/bindpw password admin" |sudo debconf-set-selections
 echo -e "ldap_auth_config        ldap_auth_config/rootbindpw password admin" |sudo debconf-set-selections
