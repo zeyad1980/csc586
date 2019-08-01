@@ -2,6 +2,20 @@
 sudo apt update
 
 echo -e "ldap_auth_config        ldap_auth_config/ldapns/ldap-server     string  ldap://192.168.1.1" |sudo debconf-set-selections
+echo -e "ldap_auth_config        ldap_auth_config/ldapns/ldap-server     string  ldap://192.168.1.1" |sudo debconf-set-selections
+
+clemson.cloudlab.us
+
+
+
+
+
+
+
+
+
+
+
 
 sudo apt install -y libnss-ldap libpam-ldap ldap-utils
 
