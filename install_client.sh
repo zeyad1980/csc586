@@ -24,13 +24,13 @@ sudo apt install -y libnss-ldap libpam-ldap ldap-utils
 
 
 sudo chmod 755 nsswitch
-sudo cp nsswitch_conf /local/repository/etc/nsswitch.conf
+sudo cp nsswitch_conf /etc/nsswitch.conf
 
 sudo chmod 755 pam_d_password
-sudo cp pam_d_password /local/repository/etc/pam.d/common-password
+sudo cp pam_d_password /etc/pam.d/common-password
 
 sudo chmod 755 pam_d_session
-sudo cp pam_d_session /local/repository/etc/pam.d/common-session  
+sudo cp pam_d_session /etc/pam.d/common-session  
 
 sudo getent passwd student
 sudo su - student
