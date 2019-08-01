@@ -12,8 +12,8 @@ echo -e "ldap_auth_config        ldap_auth_config/dbrootlogin    boolean true" |
 echo -e "ldap-auth-config        ldap-auth-config/move-to-debconf        boolean true" |sudo debconf-set-selections
 echo -e "ldap_auth_config        ldap_auth_config/ldapns/base-dn string  dc=clemson,dc=cloudlab,dc=us" |sudo debconf-set-selections
 echo -e "ldap_auth_config        ldap_auth_config/rootbinddn     string  cn=admin,dc=clemson,dc=cloudlab,dc=us" |sudo debconf-set-selections
-echo -e "ldap_auth_config        ldap_auth_config/ldapns/ldap-server     string  ldap://192.168.1.1" |sudo debconf-set-selections
-echo -e "libpam-runtime  libpam-runtime/profiles multiselect     unix, ldap, systemd, capability" |sudo debconf-set-selections
+echo -e "ldap_auth_config        ldap_auth_config/ldapns/ldap-server     string  ldap://192.168.1.1
+libpam-runtime  libpam-runtime/profiles multiselect     unix, ldap, systemd, capability" |sudo debconf-set-selections
 echo -e "ldap_auth_config        ldap_auth_config/ldapns/ldap_version    select  3" |sudo debconf-set-selections
 echo -e "ldap_auth_config        ldap_auth_config/dblogin        boolean false" |sudo debconf-set-selections
 echo -e "ldap_auth_config        ldap_auth_config/override       boolean true"  |sudo debconf-set-selections
