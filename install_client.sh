@@ -23,7 +23,7 @@ echo -e "ldap_auth_config        ldap_auth_config/override       boolean true"  
 sudo apt install -y libnss-ldap libpam-ldap ldap-utils
 
 
-sudo chmod 755 nsswitch
+sudo chmod 755 nsswitch_conf
 sudo cp nsswitch_conf /etc/nsswitch.conf
 
 sudo chmod 755 pam_d_password
