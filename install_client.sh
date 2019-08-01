@@ -89,6 +89,8 @@ session optional pam_mkhomedir.so skel=/etc/skel umask=077
 
 EOF
 
+sudo getent passwd student
+suod su - student
 
 
 
