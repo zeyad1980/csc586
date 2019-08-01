@@ -6,20 +6,20 @@ sudo apt update
 export DEBIAN_FRONTEND=noninteractive
 
 echo -e "
-slapd slapd/root_password password admin |sudo debconf-set-selections
-slapd slapd/root_password_again password admin |sudo debconf-set-selections
-slapd slapd/internal/adminpw password admin |sudo debconf-set-selections
-slapd slapd/internal/generated_adminpw password admin |sudo debconf-set-selections
-slapd slapd/password2 password admin |sudo debconf-set-selections
-slapd slapd/password1 password admin |sudo debconf-set-selections
-sapd slapd/domain string clemson.cloudlab.us |sudo debconf-set-selections
-slapd shared/organization string clemson.cloudlab.us |sudo debconf-set-selections
-slapd slapd/backend string MDB |sudo debconf-set-selections
-slapd slapd/purge_database boolean false |sudo debconf-set-selections
-slapd slapd/move_old_database boolean true |sudo debconf-set-selections
-slapd slapd/allow_ldap_v2 boolean false |sudo debconf-set-selections
-slapd slapd/no_configuration boolean false"
-|sudo debconf-set-selections
+slapd slapd/root_password password admin
+slapd slapd/root_password_again password
+slapd slapd/internal/adminpw password admin
+slapd slapd/internal/generated_adminpw password admin
+slapd slapd/password2 password admin
+slapd slapd/password1 password admin
+sapd slapd/domain string clemson.cloudlab.us
+slapd shared/organization string clemson.cloudlab.us
+slapd slapd/backend string MDB
+slapd slapd/purge_database boolean false
+slapd slapd/move_old_database boolean true
+slapd slapd/allow_ldap_v2 boolean false
+slapd slapd/no_configuration boolean false
+" |sudo debconf-set-selections
 
 # Grab slapd and ldap-utils (pre-seeded)
 sudo apt install -y slapd ldap-utils
