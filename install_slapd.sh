@@ -12,7 +12,7 @@ slapd slapd/internal/adminpw password admin
 slapd slapd/internal/generated_adminpw password admin
 slapd slapd/password2 password admin
 slapd slapd/password1 password admin
-sapd slapd/domain string clemson.cloudlab.us
+slapd slapd/domain string clemson.cloudlab.us
 slapd shared/organization string clemson.cloudlab.us
 slapd slapd/backend string MDB
 slapd slapd/purge_database boolean false
