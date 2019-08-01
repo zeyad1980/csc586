@@ -17,6 +17,7 @@ sudo ldap_auth_config        ldap_auth_config/ldapns/ldap_version    select  3
 sudo ldap_auth_config        ldap_auth_config/dblogin        boolean false
 sudo ldap_auth_config        ldap_auth_config/override       boolean true 
 
+sudo apt install -y libnss-ldap libpam-ldap ldap-utils
 
 cat<<EOF >/local/repository/etc/nsswitch.conf
 #/etc/nsswitch.conf
@@ -90,9 +91,9 @@ session optional pam_mkhomedir.so skel=/etc/skel umask=077
 EOF
 
 sudo getent passwd student
-suod su - student
+sudo su - student
 
 
 
-sudo apt install -y libnss-ldap libpam-ldap ldap-utils
+
 
