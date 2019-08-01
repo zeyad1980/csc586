@@ -19,18 +19,6 @@ echo -e "ldap_auth_config        ldap_auth_config/dblogin        boolean false" 
 echo -e "ldap_auth_config        ldap_auth_config/override       boolean true"  |sudo debconf-set-selections
 
 
-clemson.cloudlab.us
-
-
-
-
-
-
-
-
-
-
-
 
 sudo apt install -y libnss-ldap libpam-ldap ldap-utils
 
