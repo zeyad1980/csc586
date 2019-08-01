@@ -23,37 +23,8 @@ echo -e "ldap_auth_config        ldap_auth_config/override       boolean true"  
 sudo apt install -y libnss-ldap libpam-ldap ldap-utils
 
 
-
-cat<<EOF >/local/repository/etc/nsswitch.conf
-#/etc/nsswitch.conf
-#
-# Example configuration of GNU Name Service Switch functionality.
-# If you have the `glibc-doc-reference' and `info' packages installed, try:
-# `info libc "Name Service Switch"' for information about this file.
-                                                                                                                                                                                                                         
-passwd:         compat systemd ldap
-group:          compat systemd ldap                                                                                                                                                                                      
-shadow:         compat                                                                                                                                                                                                   
-gshadow:        files                                                                                                                                                                                                    
-                                                                                                                                                                                                                         
-hosts:          files dns                                                                                                                                                                                                
-networks:       files 
-
-group:          compat systemd                                                                                                                                                                                           
-shadow:         compat                                                                                                                                                                                                   
-gshadow:        files                                                                                                                                                                                                    
-                                                                                                                                                                                                                         
-hosts:          files dns                                                                                                                                                                                                
-networks:       files                                                                                                                                                                                                    
-                                                                                                                                                                                                                         
-protocols:      db files                                                                                                                                                                                                 
-services:       db files                                                                                                                                                                                                 
-ethers:         db files                                                                                                                                                                                                 
-rpc:            db files                                                                                                                                                                                                 
-                                                                                                                                                                                                                         
-netgroup:       nis 
-
-EOF
+sudo chmod 755 nsswitch
+sudo cp nsswitch_conf /local/repository/etc/nsswitch.conf
 
 cat<<EOF >/local/repository/etc/pam.d/common-password
 ## here are the per-package modules (the "Primary" block)
