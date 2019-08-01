@@ -7,7 +7,7 @@ export DEBIAN_FRONTEND=noninteractive
 
 echo -e "
 slapd slapd/root_password password admin
-slapd slapd/root_password_again password
+slapd slapd/root_password_again password admin
 slapd slapd/internal/adminpw password admin
 slapd slapd/internal/generated_adminpw password admin
 slapd slapd/password2 password admin
