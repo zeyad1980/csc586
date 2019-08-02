@@ -6,12 +6,12 @@ sudo apt update
 export DEBIAN_FRONTEND=noninteractive
 
 echo -e "
-slapd slapd/root_password password zxc123
-slapd slapd/root_password_again password zxc123
-slapd slapd/internal/adminpw password zxc123
-slapd slapd/internal/generated_adminpw password zxc123
-slapd slapd/password2 password zxc123
-slapd slapd/password1 password zxc123
+slapd slapd/root_password password admin
+slapd slapd/root_password_again password admin
+slapd slapd/internal/adminpw password admin
+slapd slapd/internal/generated_adminpw password admin
+slapd slapd/password2 password admin
+slapd slapd/password1 password admin
 slapd slapd/domain string clemson.cloudlab.us
 slapd shared/organization string clemson.cloudlab.us
 slapd slapd/backend string MDB
@@ -28,7 +28,7 @@ sudo apt install -y slapd ldap-utils
 sudo ufw allow ldap
 
 # Populate LDAP
-ldapadd -x -D cn=admin,dc=clemson,dc=cloudlab,dc=us -w zxc123 -f /local/repository/basedn.ldif
+ldapadd -x -D cn=admin,dc=clemson,dc=cloudlab,dc=us -w admin -f /local/repository/basedn.ldif
 
 # Generate password hash
 PASS=$(slappasswd -s rammy)
@@ -51,6 +51,6 @@ homeDirectory: /home/student
 EOF
 
 # Populate LDAP
-ldapadd -x -D cn=admin,dc=clemson,dc=cloudlab,dc=us -w zxc123 -f /local/repository/users.ldif
+ldapadd -x -D cn=admin,dc=clemson,dc=cloudlab,dc=us -w admin -f /local/repository/users.ldif
 
 
