@@ -12,14 +12,20 @@ slapd slapd/internal/adminpw password admin
 slapd slapd/internal/generated_adminpw password admin
 slapd slapd/password2 password admin
 slapd slapd/password1 password admin
-slapd slapd/domain string clemson.cloudlab.us
-slapd shared/organization string clemson.cloudlab.us
-slapd slapd/backend string MDB
+slapd slapd/unsafe_selfwrite_acl note
 slapd slapd/purge_database boolean false
-slapd slapd/move_old_database boolean true
+slapd slapd/domain string clemson.cloudlab.us
+slapd slapd/ppolicy_schema_needs_update select abort installation
+slapd slapd/invalid_config boolean true
+slapd slapd/move_old_database boolean false
+slapd slapd/backend select MDB
+slapd shared/organization string clemson.cloudlab.us
+slapd slapd/dump_database_destdir string /var/backups/slapd-VERSION
 slapd slapd/allow_ldap_v2 boolean false
 slapd slapd/no_configuration boolean false
-" |sudo debconf-set-selections
+slapd slapd/dump_database select when needed
+slapd slapd/password_mismatch note
+" | sudo debconf-set-selections
 
 # Grab slapd and ldap-utils (pre-seeded)
 sudo apt install -y slapd ldap-utils
