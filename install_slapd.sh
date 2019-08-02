@@ -28,7 +28,7 @@ sudo apt install -y slapd ldap-utils
 sudo ufw allow ldap
 
 # Populate LDAP
-ldapadd -x -D cn=admin,dc=clemson,dc=cloudlab,dc=us -w admin -f /local/repository/basedn.ldif
+ldapadd -x -D cn=admin,dc=clemson,dc=cloudlab,dc=us -w zxc123 -f /local/repository/basedn.ldif
 
 # Generate password hash
 PASS=$(slappasswd -s rammy)
@@ -51,6 +51,6 @@ homeDirectory: /home/student
 EOF
 
 # Populate LDAP
-ldapadd -x -D cn=admin,dc=clemson,dc=cloudlab,dc=us -w admin -f /local/repository/users.ldif
+ldapadd -x -D cn=admin,dc=clemson,dc=cloudlab,dc=us -w zxc123 -f /local/repository/users.ldif
 
 
