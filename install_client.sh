@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ADMIN_PASSWORD="zxc123"
+#ADMIN_PASSWORD="zxc123"
 #updates the system repo database
 sudo apt update
 
