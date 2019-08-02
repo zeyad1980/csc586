@@ -6,12 +6,12 @@ sudo apt update
 export DEBIAN_FRONTEND=noninteractive
 
 echo -e "
-slapd slapd/root_password password admin
-slapd slapd/root_password_again password admin
-slapd slapd/internal/adminpw password admin
-slapd slapd/internal/generated_adminpw password admin
-slapd slapd/password2 password admin
-slapd slapd/password1 password admin
+slapd slapd/root_password password zxc123
+slapd slapd/root_password_again password zxc123
+slapd slapd/internal/adminpw password zxc123
+slapd slapd/internal/generated_adminpw password zxc123
+slapd slapd/password2 password zxc123
+slapd slapd/password1 password zxc123
 slapd slapd/domain string clemson.cloudlab.us
 slapd shared/organization string clemson.cloudlab.us
 slapd slapd/backend string MDB
