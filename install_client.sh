@@ -16,8 +16,7 @@ ldap_auth_config        ldap_auth_config/rootbinddn     string  cn=admin,dc=clem
 ldap_auth_config        ldap_auth_config/ldapns/ldap-server     string  ldap://192.168.1.1
 ldap_auth_config        ldap_auth_config/ldapns/ldap_version    select  3
 ldap_auth_config        ldap_auth_config/dblogin        boolean false
-ldap_auth_config        ldap_auth_config/override       boolean true
-"| sudo debconf-get-selections
+ldap_auth_config        ldap_auth_config/override       boolean true" |sudo debconf-get-selections
 
 #installs libnss-ldap libpam-ldap ldap-utils along with all their dependencies
 sudo apt install -y libnss-ldap libpam-ldap ldap-utils
